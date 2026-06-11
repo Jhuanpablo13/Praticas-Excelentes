@@ -1,7 +1,134 @@
+// ===== PUBLICAÇÕES INICIAIS (imagens de Rio Branco do Ivai) =====
+const imagensIniciais = [
+    {
+        id: 1001,
+        nome: "Comunidade Rio Branco do Ivai",
+        titulo: "🍬 Doce de Leite Premiado - Tradição que Aquece",
+        categoria: "Produção Orgânica",
+        tipo: "foto",
+        descricao: "Doce de leite artesanal produzido pelas mãos da comunidade. Reconhecido pelo RPC como patrimônio cultural da região.",
+        tags: ["doces", "premiados", "rio branco", "artesanal"],
+        midia: "images/doce-leite.jpg",
+        data: "2026-06-11 10:00",
+        likes: 15,
+        curtido: false
+    },
+    {
+        id: 1002,
+        nome: "Artesãos Locais",
+        titulo: "Goiabada Cascão - Sabor da Terra",
+        categoria: "Produção Orgânica",
+        tipo: "foto",
+        descricao: "Goiabada cascão feita com frutas nativas da região. Premiada em feiras de agroecologia.",
+        tags: ["goiabada", "artesanal", "agroecologia"],
+        midia: "images/goiabada-premiada.jpg",
+        data: "2026-06-11 10:15",
+        likes: 10,
+        curtido: false
+    },
+    {
+        id: 1003,
+        nome: "RPC - Paraná",
+        titulo: "Reconhecimento Nacional - Equipe Rio Branco do Ivai",
+        categoria: "Agricultura Sustentável",
+        tipo: "foto",
+        descricao: "A equipe de produtores de Rio Branco do Ivai foi destaque na reportagem do RPC, mostrando como a produção de doces artesanais sustenta famílias e preserva a cultura local.",
+        tags: ["rpc", "reconhecimento", "rio branco", "cultura"],
+        midia: "images/equipe-rpc.jpg",
+        data: "2026-06-11 10:30",
+        likes: 25,
+        curtido: false
+    },
+    {
+        id: 1004,
+        nome: "Turismo Rural",
+        titulo: "Cachoeira do Rio Branco - Beleza Natural",
+        categoria: "Preservação Ambiental",
+        tipo: "foto",
+        descricao: "Uma das cachoeiras mais bonitas da região, preservada pela comunidade local. Ponto de visitação e conscientização ambiental.",
+        tags: ["cachoeira", "turismo", "preservação"],
+        midia: "images/cachoeira.jpg",
+        data: "2026-06-11 10:45",
+        likes: 20,
+        curtido: false
+    },
+    {
+        id: 1005,
+        nome: "Vista Aérea",
+        titulo: "Rio Branco do Ivai - Cidade Verde",
+        categoria: "Preservação Ambiental",
+        tipo: "foto",
+        descricao: "Vista panorâmica da cidade, cercada por matas e lavouras sustentáveis. Um exemplo de equilíbrio entre urbanização e natureza.",
+        tags: ["cidade", "verde", "rio branco"],
+        midia: "images/cidade-aerea.jpg",
+        data: "2026-06-11 11:00",
+        likes: 18,
+        curtido: false
+    },
+    {
+        id: 1006,
+        nome: "Cultura Local",
+        titulo: "Mulher e Tradição - Rio Branco do Ivai",
+        categoria: "Agricultura Sustentável",
+        tipo: "foto",
+        descricao: "Representante da cultura local em frente à fachada da cidade. A força da mulher do campo na preservação das tradições.",
+        tags: ["cultura", "mulher", "tradição"],
+        midia: "images/mulher-fachada.jpg",
+        data: "2026-06-11 11:15",
+        likes: 12,
+        curtido: false
+    },
+    {
+        id: 1007,
+        nome: "Paisagem Rural",
+        titulo: "Estrada do Sol - Fim de Tarde no Campo",
+        categoria: "Preservação Ambiental",
+        tipo: "foto",
+        descricao: "O pôr do sol ilumina a estrada de terra e a árvore centenária. A natureza que inspira o trabalho no campo.",
+        tags: ["paisagem", "sol", "estrada", "natureza"],
+        midia: "images/estrada-sol.jpg",
+        data: "2026-06-11 11:30",
+        likes: 8,
+        curtido: false
+    },
+    {
+        id: 1008,
+        nome: "Agroecologia",
+        titulo: "Cavalos e a Lida no Campo",
+        categoria: "Agricultura Sustentável",
+        tipo: "foto",
+        descricao: "Tradição da lida com cavalos na região de Rio Branco do Ivai. Convivência harmoniosa entre o trabalho rural e o meio ambiente.",
+        tags: ["cavalos", "tradição", "agroecologia"],
+        midia: "images/cavalos.jpg",
+        data: "2026-06-11 11:45",
+        likes: 10,
+        curtido: false
+    },
+    {
+        id: 1009,
+        nome: "Lavoura Sustentável",
+        titulo: "Plantação Jovem - O Futuro da Agricultura",
+        categoria: "Agricultura Sustentável",
+        tipo: "foto",
+        descricao: "Lavoura em início de desenvolvimento, com manejo sustentável e respeito à terra. O futuro da agricultura começa aqui.",
+        tags: ["lavoura", "sustentável", "agro"],
+        midia: "images/lavoura.jpg",
+        data: "2026-06-11 12:00",
+        likes: 7,
+        curtido: false
+    }
+];
+
 let filtroAtual = 'todos';
 let publicacoes = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Se não houver publicações no localStorage, carrega as iniciais
+    const stored = localStorage.getItem('boasPraticas');
+    if (!stored || JSON.parse(stored).length === 0) {
+        localStorage.setItem('boasPraticas', JSON.stringify(imagensIniciais));
+    }
+    
     carregarPublicacoes();
     configurarPrompt();
     atualizarEstatisticas();
@@ -50,7 +177,6 @@ function previewMidia() {
     }
 }
 
-
 function publicar() {
     const nome = document.getElementById('nome').value.trim();
     const titulo = document.getElementById('titulo').value.trim();
@@ -60,7 +186,6 @@ function publicar() {
     const tagsInput = document.getElementById('tags').value;
     const midiaFile = document.getElementById('midiaUpload').files[0];
 
-    // Validações
     if (!nome || !titulo || !descricao) {
         alert('Por favor, preencha todos os campos obrigatórios!');
         return;
@@ -104,11 +229,8 @@ function publicar() {
 
         salvarPublicacao(publicacao);
         fecharModal();
-        
-        // Forçar atualização completa
         carregarPublicacoes();
         atualizarEstatisticas();
-        
         alert('✅ Publicação compartilhada com sucesso! Obrigado por contribuir com boas práticas!');
     };
 
@@ -233,14 +355,6 @@ function atualizarEstatisticas() {
     document.getElementById('total-publicacoes').textContent = publicacoes.length;
     document.getElementById('total-fotos').textContent = totalFotos;
     document.getElementById('total-videos').textContent = totalVideos;
-    
-    // Debug para verificar
-    console.log('Estatísticas atualizadas:', {
-        total: publicacoes.length,
-        fotos: totalFotos,
-        videos: totalVideos,
-        publicacoes: publicacoes.map(p => ({ tipo: p.tipo, titulo: p.titulo }))
-    });
 }
 
 function limparTodasPublicacoes() {
@@ -328,9 +442,8 @@ window.onclick = function(event) {
     }
 }
 
-// ===== FUNÇÕES ADICIONADAS PARA A SEÇÃO DE CONTATO =====
+// ===== SEÇÃO DE CONTATO (copiar texto) =====
 function copiarTexto(texto, tipo) {
-    // Tenta usar a API moderna
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(texto).then(() => {
             alert(`📋 ${tipo} copiado com sucesso!`);
@@ -343,7 +456,6 @@ function copiarTexto(texto, tipo) {
 }
 
 function fallbackCopiar(texto, tipo) {
-    // Método alternativo para navegadores mais restritos
     const textarea = document.createElement('textarea');
     textarea.value = texto;
     textarea.style.position = 'fixed';
@@ -357,4 +469,14 @@ function fallbackCopiar(texto, tipo) {
         alert('❌ Não foi possível copiar. Por favor, copie manualmente.');
     }
     document.body.removeChild(textarea);
+}
+
+// ===== FUNÇÃO EXTRA PARA RESETAR (use no console se precisar) =====
+function resetarPublicacoesIniciais() {
+    if (confirm('⚠️ Isso vai apagar todas as publicações e restaurar as imagens iniciais. Continuar?')) {
+        localStorage.setItem('boasPraticas', JSON.stringify(imagensIniciais));
+        carregarPublicacoes();
+        atualizarEstatisticas();
+        alert('✅ Publicações iniciais restauradas!');
+    }
 }
