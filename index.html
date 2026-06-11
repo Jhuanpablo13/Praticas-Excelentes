@@ -1,19 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boas Práticas </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+               🚜 Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente 🌳
+            </h1>
+            <p>Compartilhe fotos e vídeos de ações que equilibram produção e meio ambiente </p>
+            <p>👨‍💻Colégio Estadual Rio Branco👨‍💻</p>
+        </div>
 
-  </head>
-  <p>Jhuan Pablo<p>
-    <body>
-    <main>
-      
-    </main>
-    <script src="script.js"></script>
-  </body>
+        <!-- ===== CITAÇÃO FILOSÓFICA ===== -->
+        <div class="citacao-filosofo">
+            <i class="fas fa-quote-left"></i>
+            <blockquote>
+                A agricultura não é uma ciência, mas uma arte que exige colaboração com a natureza, não dominação.
+            </blockquote>
+            <cite>— Masanobu Fukuoka, agricultor e filósofo japonês</cite>
+            <i class="fas fa-seedling"></i>
+        </div>
+
+        <button class="btn-compartilhar" onclick="abrirModal()">
+            <i class="fas fa-camera"></i>
+            Compartilhar Foto ou Vídeo
+            <i class="fas fa-video"></i>
+        </button>
+
+        <div class="filtros">
+            <button class="filtro-btn ativo" onclick="filtrarPublicacoes('todos', this)">
+                <i class="fas fa-globe"></i> Todos
+            </button>
+            <button class="filtro-btn" onclick="filtrarPublicacoes('foto', this)">
+                <i class="fas fa-camera"></i> Fotos
+            </button>
+            <button class="filtro-btn" onclick="filtrarPublicacoes('video', this)">
+                <i class="fas fa-video"></i> Vídeos
+            </button>
+        </div>
+
+        <div class="estatisticas" id="estatisticas">
+            <div class="estatistica-item">
+                <div class="estatistica-valor" id="total-publicacoes">0</div>
+                <div class="estatistica-label">Total de Contribuições</div>
+            </div>
+            <div class="estatistica-item">
+                <div class="estatistica-valor" id="total-fotos">0</div>
+                <div class="estatistica-label">Fotos</div>
+            </div>
+            <div class="estatistica-item">
+                <div class="estatistica-valor" id="total-videos">0</div>
+                <div class="estatistica-label">Vídeos</div>
+            </div>
+        </div>
+
+        <div id="publicacoes" class="publicacoes-grid"></div>
+
+        <!-- ===== SEÇÃO DE CONTATO ===== -->
+        <div class="secao-contato">
+            <h2 class="contato-titulo">
+                <i class="fas fa-address-card"></i> Fale com a gente
+            </h2>
+            <p class="contato-descricao">
+                Tem alguma dúvida, sugestão ou quer participar da comunidade? Entre em contato!
+            </p>
+            <div class="contato-cards">
+                <!-- Telefone -->
+                <div class="contato-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="contato-label">Telefone / WhatsApp</span>
+                    <a href="https://wa.me/5543996004765" target="_blank" class="contato-link">
+                        (43) 99600-4765
+                    </a>
+                    <button class="btn-copiar" onclick="copiarTexto('(43) 99600-4765', 'Telefone')" title="Copiar número">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+                <!-- Instagram -->
+                <div class="contato-item">
+                    <i class="fab fa-instagram"></i>
+                    <span class="contato-label">Instagram</span>
+                    <a href="https://instagram.com/cisz_jhuan" target="_blank" class="contato-link">
+                        @cisz_jhuan
+                    </a>
+                </div>
+                <!-- Facebook -->
+                <div class="contato-item">
+                    <i class="fab fa-facebook"></i>
+                    <span class="contato-label">Facebook</span>
+                    <a href="https://facebook.com/cisz_jhuan" target="_blank" class="contato-link">
+                        @cisz_jhuan
+                    </a>
+                </div>
+                <!-- E-mail escolar -->
+                <div class="contato-item">
+                    <i class="fas fa-envelope"></i>
+                    <span class="contato-label">E-mail Escolar</span>
+                    <a href="mailto:jhuan.cisz@escola" class="contato-link">
+                        jhuan.cisz@escola
+                    </a>
+                    <button class="btn-copiar" onclick="copiarTexto('jhuan.cisz@escola', 'E-mail escolar')" title="Copiar e-mail">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+                <!-- E-mail pessoal -->
+                <div class="contato-item">
+                    <i class="fas fa-envelope"></i>
+                    <span class="contato-label">E-mail Pessoal</span>
+                    <a href="mailto:jhuanpablocisz5@gmail.com" class="contato-link">
+                        jhuanpablocisz5@gmail.com
+                    </a>
+                    <button class="btn-copiar" onclick="copiarTexto('jhuanpablocisz5@gmail.com', 'E-mail pessoal')" title="Copiar e-mail">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="publicacaoModal" class="modal">
+        <div class="modal-content">
+            <h2>
+                <i class="fas fa-upload"></i>
+                Compartilhar Boa Prática
+            </h2>
+
+            <form id="formPublicacao" onsubmit="event.preventDefault(); publicar();">
+                <div class="form-group">
+                    <label>Seu nome:</label>
+                    <input type="text" id="nome" placeholder="Como você quer ser identificado?" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Título da prática:</label>
+                    <input type="text" id="titulo" placeholder="Ex: Reaproveitamento de água na lavoura" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select id="categoria" required>
+                        <option value="Agricultura Sustentável">🌱 Agricultura Sustentável</option>
+                        <option value="Reciclagem">♻️ Reciclagem</option>
+                        <option value="Energia Renovável">☀️ Energia Renovável</option>
+                        <option value="Preservação">🌳 Preservação Ambiental</option>
+                        <option value="Produção Orgânica">🥕 Produção Orgânica</option>
+                        <option value="Compostagem">🔄 Compostagem</option>
+                        <option value="Outros">📌 Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de mídia:</label>
+                    <select id="tipoMidia" onchange="toggleMidiaUpload()" required>
+                        <option value="foto">📸 Foto</option>
+                        <option value="video">🎥 Vídeo</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="midiaUploadGroup">
+                    <label>Selecione o arquivo:</label>
+                    <input type="file" id="midiaUpload" accept="image/*,video/*" onchange="previewMidia()" required>
+                    <div id="preview" class="preview-container"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição da prática:</label>
+                    <textarea id="descricao" placeholder="Descreva sua prática, como ela ajuda o meio ambiente e quais resultados você tem obtido..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Tags (separadas por vírgula):</label>
+                    <input type="text" id="tags" placeholder="Ex: sustentabilidade, água, reciclagem">
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary" onclick="fecharModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> Publicar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="comando-ajuda">
+        <i class="fas fa-terminal"></i> Digite /ajuda para ver os comandos disponíveis
+    </div>
     
-  
+    <div id="prompt-container">
+        📡
+        <input type="text" id="inputComando" placeholder="Digite seu comando aqui..." autofocus>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
