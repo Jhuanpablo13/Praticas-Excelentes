@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boas Práticas </title>
+    <title>Boas Práticas Agro 🌱 - Rio Branco do Ivai</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon.png">
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <!-- ===== CABEÇALHO ===== -->
+        <header class="header">
             <h1>
-               🚜 Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente 🌳
+                <span>🚜</span> 
+                Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente 
+                <span>🌳</span>
             </h1>
-            <p>Compartilhe fotos e vídeos de ações que equilibram produção e meio ambiente </p>
-            <p>👨‍💻Colégio Estadual Rio Branco👨‍💻</p>
-        </div>
+            <p>Compartilhe fotos e vídeos de ações que equilibram produção e meio ambiente</p>
+            <div class="header-sub">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Colégio Estadual Rio Branco</span>
+                <i class="fas fa-leaf"></i>
+            </div>
+        </header>
 
         <!-- ===== CITAÇÃO FILOSÓFICA ===== -->
         <div class="citacao-filosofo">
@@ -28,12 +35,14 @@
             <i class="fas fa-seedling"></i>
         </div>
 
+        <!-- ===== BOTÃO COMPARTILHAR ===== -->
         <button class="btn-compartilhar" onclick="abrirModal()">
             <i class="fas fa-camera"></i>
             Compartilhar Foto ou Vídeo
             <i class="fas fa-video"></i>
         </button>
 
+        <!-- ===== FILTROS ===== -->
         <div class="filtros">
             <button class="filtro-btn ativo" onclick="filtrarPublicacoes('todos', this)">
                 <i class="fas fa-globe"></i> Todos
@@ -46,6 +55,7 @@
             </button>
         </div>
 
+        <!-- ===== ESTATÍSTICAS ===== -->
         <div class="estatisticas" id="estatisticas">
             <div class="estatistica-item">
                 <div class="estatistica-valor" id="total-publicacoes">0</div>
@@ -61,10 +71,11 @@
             </div>
         </div>
 
+        <!-- ===== GRID DE PUBLICAÇÕES ===== -->
         <div id="publicacoes" class="publicacoes-grid"></div>
 
         <!-- ===== SEÇÃO DE CONTATO ===== -->
-        <div class="secao-contato">
+        <section class="secao-contato">
             <h2 class="contato-titulo">
                 <i class="fas fa-address-card"></i> Fale com a gente
             </h2>
@@ -83,6 +94,7 @@
                         <i class="fas fa-copy"></i> Copiar
                     </button>
                 </div>
+
                 <!-- Instagram -->
                 <div class="contato-item">
                     <i class="fab fa-instagram"></i>
@@ -91,6 +103,7 @@
                         @cisz_jhuan
                     </a>
                 </div>
+
                 <!-- Facebook -->
                 <div class="contato-item">
                     <i class="fab fa-facebook"></i>
@@ -99,6 +112,7 @@
                         @cisz_jhuan
                     </a>
                 </div>
+
                 <!-- E-mail escolar -->
                 <div class="contato-item">
                     <i class="fas fa-envelope"></i>
@@ -110,6 +124,7 @@
                         <i class="fas fa-copy"></i> Copiar
                     </button>
                 </div>
+
                 <!-- E-mail pessoal -->
                 <div class="contato-item">
                     <i class="fas fa-envelope"></i>
@@ -122,9 +137,10 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
+    <!-- ===== MODAL DE COMPARTILHAMENTO ===== -->
     <div id="publicacaoModal" class="modal">
         <div class="modal-content">
             <h2>
@@ -192,14 +208,17 @@
         </div>
     </div>
 
+    <!-- ===== PROMPT DE COMANDOS ===== -->
     <div class="comando-ajuda">
         <i class="fas fa-terminal"></i> Digite /ajuda para ver os comandos disponíveis
     </div>
     
     <div id="prompt-container">
-        📡
+        <i class="fas fa-terminal" id="prompt-icon"></i>
         <input type="text" id="inputComando" placeholder="Digite seu comando aqui..." autofocus>
     </div>
+
+    <!-- ===== SCRIPT ===== -->
     <script src="script.js"></script>
 </body>
 </html>
